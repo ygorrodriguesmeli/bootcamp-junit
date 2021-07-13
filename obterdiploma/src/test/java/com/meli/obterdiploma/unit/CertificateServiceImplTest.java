@@ -5,6 +5,7 @@ import com.meli.obterdiploma.dto.StudentDiplomaDTO;
 import com.meli.obterdiploma.dto.SubjectDTO;
 import com.meli.obterdiploma.service.DiplomaService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class CertificateServiceImplTest {
 
@@ -56,11 +59,13 @@ public class CertificateServiceImplTest {
         ));
         StudentDiplomaDTO expectedDiploma = new StudentDiplomaDTO("Sua média foi de 9.5",
                 9.5, Collections.singletonList(studentDTO));
-        DiplomaService service = new DiplomaService();
+
+        DiplomaService service = Mockito.mock(DiplomaService.class);
+        when(service.buildDiploma(any())).thenReturn(expectedDiploma);
 
         StudentDiplomaDTO diplomaDTO = service.buildDiploma(studentDTO);
 
-        assertEquals(expectedDiploma.getAverage(), diplomaDTO.getAverage());
+        assertEquals(expectedDiploma, diplomaDTO);
     }
 
     @Test
