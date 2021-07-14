@@ -17,8 +17,8 @@ public class EmpregadoService {
         this.repository = repository;
     }
 
-    public void cadastra(Empregado empregado) {
-        repository.save(empregado);
+    public long cadastra(Empregado empregado) {
+        return repository.save(empregado).getId();
     }
 
     public Empregado get(long id) {

@@ -42,4 +42,14 @@ public class EmpregadoDTO {
                 empregado.getNome(), empregado.getRG(), empregado.getSalarioAtual()
         )).collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return "EmpregadoDTO{" +
+                "nome='" + nome + '\'' +
+                ", RG='" + RG + '\'' +
+                ", salarioAtual=" + salarioAtual +
+                '}';
+    }
+
 }
